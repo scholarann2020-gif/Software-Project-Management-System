@@ -1,2 +1,5 @@
-def is_empty(value):
-    return not value or value.strip() == ""
+"""
+ARCHIVED: `validators.py` moved to `archived_removed/validators.py`.
+This module was unused; keep archived copy for history.
+"""
+raise ImportError("validators.py has been archived; see archived_removed/validators.py")

@@ -21,3 +21,8 @@ class ProjectView:
         for project in ProjectService.get_projects():
             ttk.Label(frame, text=project["name"]).pack()
             styled_button(frame, "Tasks", lambda p=project["id"]: TaskView(root, p)).pack()
+    """
+    ARCHIVED: `project_view.py` was moved to `archived_removed/project_view.py`.
+    This file is intentionally left as a stub to avoid accidental imports.
+    """
+    raise ImportError("project_view.py has been archived; see archived_removed/project_view.py")
