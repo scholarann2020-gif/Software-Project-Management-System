@@ -1,4 +1,12 @@
 import unittest
+from pathlib import Path
+import sys
+# ensure project root is importable when running tests directly
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+import unittest
 from unittest.mock import patch
 
 from app.services.project_service import ProjectService

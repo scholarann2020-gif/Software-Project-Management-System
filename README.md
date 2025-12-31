@@ -1,99 +1,315 @@
-# Software-Project-Management-System
-
 Software Project Management System (SPMS)
+1. Overview
 
-A Software Project Management System (SPMS) is a tool designed to facilitate the planning, tracking, and management of software development projects. It aims to streamline project processes, improve communication, and ensure timely delivery by providing comprehensive features for resource allocation, scheduling, and progress monitoring.
+The Software Project Management System (SPMS) is a desktop-based application developed using Python (Tkinter) for the graphical user interface and SQL Server / MySQL for backend data management. The system is designed to assist software organizations in efficiently planning, executing, monitoring, and controlling software development projects.
 
-Key Features
+SPMS enables project managers, employees, administrators, and clients to collaborate through a single application by tracking projects, tasks, financials, and reports in a structured and transparent manner. The system reduces manual effort, improves accountability, and enhances overall project visibility.
 
-Project Planning & Scheduling
+2. Key Features
+2.1 User Authentication
 
-Task Management: Breaks down projects into tasks and assigns them to team members.
+Secure role-based login system
 
-Milestones & Deadlines: Sets key project milestones and tracks deadlines.
+User roles include:
 
-Gantt Charts: Visual timelines to monitor project progress.
+Admin
 
-Resource Allocation: Ensures optimal allocation of human and material resources.
+Project Manager
 
-Collaboration & Communication
+Employee
 
-Team Communication: Integrated chat, file sharing, and video conferencing.
+Client
 
-Document Management: Centralized storage for project files, code, and documentation.
+Ensures controlled access to system functionalities
 
-Collaboration Tools: Shared calendars, task boards (Kanban/Scrum), and discussions.
+2.2 Dashboard
 
-Time & Task Tracking
+Centralized overview of:
 
-Time Logging: Tracks time spent on tasks for productivity analysis.
+Ongoing and completed projects
 
-Task Dependencies: Manages tasks that depend on others for completion.
+Task progress and workload distribution
 
-Agile Boards: Kanban/Scrum boards for agile project management.
+Budget utilization
 
-Budget & Cost Management
+Recent activities and upcoming deadlines
 
-Cost Tracking: Monitors project expenses and resource costs.
+Provides quick insights for decision-making
 
-Budget Planning: Estimates and tracks project budgets.
+2.3 Project Management
 
-Cost-to-Completion Analysis: Provides insights on remaining project costs.
+Create and manage projects with detailed attributes:
 
-Risk & Issue Management
+Project title and description
 
-Risk Identification: Detects potential risks and provides mitigation strategies.
+Start and end dates
 
-Issue Tracking: Manages bugs, defects, and other project issues.
+Assigned manager and client
 
-Quality Assurance & Testing
+Project budget
 
-Test Management: Tracks test cases and bug resolution.
+Status (Planned, In Progress, Completed, On Hold)
 
-Continuous Integration: Integrates with CI/CD pipelines for automated testing and deployment.
+Monitor overall project progress in real time
 
-Reporting & Analytics
+2.4 Task Management
 
-Progress Dashboards: Visualizes project status, task completion, and budget tracking.
+Divide projects into multiple tasks
 
-Performance Metrics: Analyzes team performance, timelines, and risks.
+Assign tasks to employees
 
-Technologies Used
+Define deadlines and priorities
 
-Backend: Python (Django/Flask), SQLAlchemy, Celery for task scheduling.
+Track task status:
 
-Frontend: JavaScript (React/Vue), HTML/CSS for responsive design.
+Pending
 
-Database: PostgreSQL/MySQL for storing project data.
+In Progress
 
-Version Control: Git/GitHub for source code management.
+Completed
 
-Development Life Cycle Integration
+Maintain task update history
 
-The SPMS integrates with all stages of the software development life cycle:
+2.5 Client Management
 
-Initiation: Define scope, objectives, and stakeholders.
+Store client information securely
 
-Planning: Develop detailed project plans and schedules.
+Associate clients with multiple projects
 
-Execution: Track and manage tasks, timelines, and resources.
+Allow clients to view project progress and reports
 
-Monitoring & Control: Continuously track progress and adjust plans as necessary.
+Maintain professional transparency
 
-Closure: Final project delivery, documentation, and evaluation.
+2.6 Billing and Finance
 
-Benefits
+Track project budgets
 
-Improved Productivity: Streamlined workflows and better task management.
+Generate invoices based on milestones or project phases
 
-Enhanced Communication: Centralized communication channels for team collaboration.
+Record payments and outstanding balances
 
-Budget & Resource Efficiency: Better control over project costs and resource allocation.
+Provide financial summaries per project
 
-Risk Mitigation: Proactive identification and resolution of risks and issues.
+2.7 Reports
 
-Quality Control: Ensures the final product meets quality standards through integrated testing.
+Generate detailed reports for:
 
-Conclusion
+Project progress
 
-A Software Project Management System is crucial for the successful execution of software projects. It enables teams to manage tasks, resources, and timelines efficiently, ensuring that projects are completed on time, within budget, and to the required quality standards.
+Task completion
+
+Financial transactions
+
+Export reports in:
+
+CSV format
+
+PDF format
+
+2.8 Recent Activity Monitoring
+
+View tasks updated on the current day
+
+Identify approaching deadlines
+
+Highlight delayed or overdue tasks
+
+Assist managers in proactive issue resolution
+
+3. System Objectives
+
+Automate software project management processes
+
+Improve collaboration between stakeholders
+
+Enhance transparency and accountability
+
+Reduce project delays and budget overruns
+
+Provide accurate reporting and documentation
+
+4. Scope of the System
+
+The SPMS covers:
+
+User and role management
+
+Project and task lifecycle management
+
+Client and employee data handling
+
+Financial tracking and reporting
+
+Activity monitoring and reporting
+
+The system is suitable for small to medium-sized software organizations and operates as a desktop application, making it effective in environments without continuous internet access.
+
+5. User Roles and Responsibilities
+Admin
+
+Manage users and roles
+
+View and control all system data
+
+Generate system-wide reports
+
+Project Manager
+
+Create and manage projects
+
+Assign tasks to employees
+
+Track project timelines and budgets
+
+Communicate with clients
+
+Employee
+
+View assigned tasks
+
+Update task progress
+
+Submit work-related remarks
+
+Client
+
+View assigned projects
+
+Monitor progress
+
+Access invoices and reports (read-only)
+
+6. System Architecture
+
+The SPMS follows a three-tier architecture:
+
+Presentation Layer
+
+Tkinter-based GUI
+
+User interaction and navigation
+
+Application Layer
+
+Python business logic
+
+Validation, workflows, and access control
+
+Database Layer
+
+SQL Server / MySQL
+
+Secure data storage and retrieval
+
+7. Database Design (High-Level)
+Core Tables
+
+Users
+
+Roles
+
+Projects
+
+Tasks
+
+Clients
+
+Invoices
+
+Payments
+
+Activity_Log
+
+Relationships
+
+One project → multiple tasks
+
+One client → multiple projects
+
+One project → multiple invoices
+
+8. Technologies Used
+Component	Technology
+Programming Language	Python 3.x
+GUI Framework	Tkinter
+Database	SQL Server / MySQL
+Database Connector	pyodbc / mysql-connector-python
+Reporting	CSV / PDF
+Operating System	Windows
+9. Installation and Setup
+9.1 Prerequisites
+
+Python 3.x
+
+Tkinter (included with Python)
+
+MySQL or SQL Server
+
+Required Python libraries:
+
+mysql-connector-python (for MySQL)
+
+pyodbc (for SQL Server)
+
+9.2 Installation Steps
+
+Clone the repository:
+
+git clone https://github.com/username/SPMS-Tkinter.git
+
+
+Navigate to the project directory:
+
+cd SPMS-Tkinter
+
+
+Install required dependencies:
+
+pip install -r requirements.txt
+
+
+Configure the database connection:
+
+Update database credentials in the configuration file
+
+Import the provided SQL schema
+
+Run the application:
+
+python main.py
+
+10. Non-Functional Requirements
+
+User-friendly interface
+
+Secure data access and storage
+
+High performance and reliability
+
+Scalable and maintainable architecture
+
+Error handling and logging
+
+11. Limitations
+
+Desktop-based only
+
+No real-time cloud synchronization
+
+Requires local database setup
+
+12. Future Enhancements
+
+Web-based version (Django / Flask)
+
+Mobile application support
+
+Real-time notifications
+
+Advanced analytics dashboards
+
+Integration with Git and CI/CD tools
+
+13. Conclusion
+
+The Software Project Management System (SPMS) provides a comprehensive and efficient solution for managing software projects. By integrating project tracking, task management, billing, and reporting into a single desktop application, SPMS enhances productivity, transparency, and project success rates.

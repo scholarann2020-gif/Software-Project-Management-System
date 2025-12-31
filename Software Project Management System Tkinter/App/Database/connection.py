@@ -1,7 +1,6 @@
 from app.config import DB_TYPE, DB_CONFIG, MSSQL_CONFIG
 
 
-# Controlled exception used when DB can't be reached.
 class DatabaseUnavailable(Exception):
     pass
 
@@ -11,16 +10,8 @@ class DatabaseConnection:
 
     @classmethod
     def get_connection(cls):
-        """Return a DB connection. Supports `mysql` and `mssql` (pyodbc).
-
-        For MSSQL we return a lightweight wrapper that provides a
-        `cursor(dictionary=True)`-compatible cursor and accepts `%s` param
-        placeholders (they are translated to `?` for pyodbc) so existing
-        code does not need to be changed.
-        """
         if DB_TYPE.lower() == "mssql":
             return cls._get_mssql_connection()
-        # default to mysql
         return cls._get_mysql_connection()
 
     @classmethod
@@ -33,8 +24,6 @@ class DatabaseConnection:
 
     @classmethod
     def _get_mssql_connection(cls):
-        # Try multiple ODBC drivers and a pymssql fallback to improve
-        # compatibility with different developer environments.
         cfg = MSSQL_CONFIG
         server = cfg.get("server")
         database = cfg.get("database", "")
@@ -44,7 +33,6 @@ class DatabaseConnection:
 
         tried = []
 
-        # First, try pyodbc with one of several common drivers
         try:
             import pyodbc
 
@@ -64,20 +52,15 @@ class DatabaseConnection:
                     cls._connection = _MSSQLConnectionWrapper(raw_conn)
                     return cls._connection
                 except Exception:
-                    # try the next driver
                     continue
         except Exception:
-            # pyodbc not available or import failed; we'll try pymssql below
             pass
 
-        # Next fallback: try pymssql (may work if pyodbc/ODBC driver missing)
         try:
             import pymssql
 
-            # pymssql typically uses server, user, password, database
             try:
                 if trusted:
-                    # pymssql doesn't support Windows auth easily; skip if trusted
                     raise Exception("pymssql does not support Windows auth in this environment")
                 raw_conn = pymssql.connect(server=server, user=user, password=password, database=database)
                 cls._connection = _MSSQLConnectionWrapper(raw_conn)
@@ -85,10 +68,8 @@ class DatabaseConnection:
             except Exception:
                 pass
         except Exception:
-            # pymssql not installed; fall through
             pass
 
-        # If we reach here nothing worked
         print("Tried MSSQL drivers:", tried)
         raise DatabaseUnavailable("Could not connect to MSSQL server. Ensure an ODBC driver (ODBC Driver 17/18) is installed and pyodbc is available, or install pymssql and provide credentials.")
 
@@ -96,9 +77,6 @@ class DatabaseConnection:
 
 
 class _MSSQLConnectionWrapper:
-    """Wrap a pyodbc connection to provide a cursor(dictionary=True)
-    and a simple `is_connected()` for compatibility with mysql.connector.
-    """
     def __init__(self, raw_conn):
         self._raw = raw_conn
 
@@ -113,7 +91,6 @@ class _MSSQLConnectionWrapper:
 
     def is_connected(self):
         try:
-            # simple probe
             self._raw.cursor().execute("SELECT 1")
             return True
         except Exception:
@@ -126,7 +103,6 @@ class _MSSQLCursorWrapper:
         self._dict = dictionary
 
     def execute(self, query, params=None):
-        # convert MySQL-style %s placeholders to pyodbc ? placeholders
         q = query.replace("%s", "?")
         if params is None:
             return self._cur.execute(q)
