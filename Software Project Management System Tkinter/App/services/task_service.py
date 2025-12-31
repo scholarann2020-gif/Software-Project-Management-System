@@ -1,4 +1,4 @@
-from app.database.connection import DatabaseConnection
+from app.Database.connection import DatabaseConnection
 
 
 class TaskService:
